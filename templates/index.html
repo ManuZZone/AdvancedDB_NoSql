@@ -1,0 +1,40 @@
+{% extends './base.html' %}
+{% block content %}
+
+<div id="list_alerts" class="toast toast-top toast-center">
+    
+</div>
+<div class="flex items-center justify-center h-screen">
+    <div id="btn_load_geometries" class="btn">Carica JSON</div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script>
+    var btnLoadGeometries = $('#btn_load_geometries');
+    var listAlerts = $('#list_alerts');
+
+    function onLoadGeometriesPressed() {
+        btnLoadGeometries.addClass('loading');
+        $.post('/geometries').then((result) => {
+            showAlert(result.message);
+        }).always(() => {
+            btnLoadGeometries.removeClass('loading');
+        })
+    }
+
+    function showAlert(message){
+        listAlerts.append(`
+            <div class="alert alert-success">
+                <span>${message}.</span>
+            </div>
+        `);
+        setTimeout(() => {
+            listAlerts.empty();
+        }, 2000);
+    }
+
+    btnLoadGeometries.on('click', onLoadGeometriesPressed);
+
+</script>
+{% endblock %}
