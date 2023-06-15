@@ -1,12 +1,13 @@
 {% extends './base.html' %}
 {% block content %}
 
+
 <div class="w-screen h-screen flex items-center justify-between">
     <div class="w-1/5 h-full flex items-center justify-center h-screen">
         <div id="btn_load_geometries" class="btn">Carica JSON</div>
         <div id="btn_delete_geometries" class="btn">Elimina geometrie</div>
     </div>
-    <iframe id="frame_view" src="http://127.0.0.1:8081/db/freight_transport_geometries/streets" class="w-4/5 h-full"></iframe>
+    <iframe id="frame_view" src="http://127.0.0.1:7474/browser/" class="w-4/5 h-full"></iframe>
 </div>
 
 {% endblock %}

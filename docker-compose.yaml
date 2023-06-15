@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - 27017:27017
+
+  neo4j:
+    image: neo4j
+    restart: always
+    volumes:
+      - neo4j-data:/data
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/{your_neo4j_password}
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+
+volumes:
+  mongodb-data:
+  neo4j-data:

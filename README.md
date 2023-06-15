@@ -52,7 +52,7 @@ Breve descrizione del progetto e delle sue funzionalità.
     ```
 
   Questo comando installerà tutte le librerie elencate nel file `requirements.txt`.
-
+### BASTA FARE docker compose up LOL ###
 ### 3. Avvio di Neo4j
 
 - Apri un altro terminale o una finestra del prompt dei comandi.
