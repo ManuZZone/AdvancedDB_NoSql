@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  db:
+    container_name: pg_container
+    image: kartoza/postgis:15-3.3
+    volumes:
+      - E:\DockerVolumes\postgis-data:/var/lib/postgresql
+      - E:\DockerVolumes\dbbackups:/backups
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+      POSTGRES_MULTIPLE_EXTENSIONS: postgis,hstore,postgis_topology,postgis_raster,pgrouting
+      RUN_AS_ROOT: true
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+      
+  neo4j:
+    image: neo4j
+    volumes:
+      - E:\DockerVolumes\neo4j-data:/data
+      - E:\DockerVolumes\neo4j-conf:/conf
+      - E:\DockerVolumes\neo4j-logs:/logs
+      - E:\DockerVolumes\neo4j-plugins:/plugins
+      - ./archive:/var/lib/neo4j/import
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/{your_neo4j_password}
+      - NEO4J_db_transaction_timeout=10m
